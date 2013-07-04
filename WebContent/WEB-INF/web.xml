@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>testYubikey</display-name>
+  <welcome-file-list>
+    <welcome-file>loginTest.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>yubiKeyRegister</display-name>
+    <servlet-name>yubiKeyRegister</servlet-name>
+    <servlet-class>com.yubikey.servlet.YubiKeyRegister</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>yubiKeyRegister</servlet-name>
+    <url-pattern>/yubiKeyRegister</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>yubikeyNewUser</display-name>
+    <servlet-name>yubikeyNewUser</servlet-name>
+    <servlet-class>com.yubikey.servlet.YubikeyNewUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>yubikeyNewUser</servlet-name>
+    <url-pattern>/yubikeyNewUser</url-pattern>
+  </servlet-mapping>
+  <!-- Start code For Session Filter -->
+ <filter>
+    <filter-name>SessionFilter</filter-name>
+		<filter-class>com.yubikey.filter.SessionFilter</filter-class>
+    <init-param>
+        <param-name>avoid-urls</param-name>
+        <param-value>/index.jsp,/Fail.jsp,/loginTest.jsp,/Success.jsp,/userRegister.jsp</param-value>
+    </init-param>
+</filter>
+	<filter-mapping>
+    	<filter-name>SessionFilter</filter-name>
+    	<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+ <!-- End code For Session Filter --> 
+</web-app>
